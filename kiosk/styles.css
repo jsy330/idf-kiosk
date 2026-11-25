@@ -153,12 +153,12 @@ button:active { transform: scale(.98); }
   min-height: 0; container-type: size;
 }
 .menu-tile .tile-icon {
-  width: clamp(5rem, min(34cqh, 36cqw), 12rem); aspect-ratio: 1; border-radius: 24%;
+  width: max(4.5rem, min(52cqh, 50cqw)); aspect-ratio: 1; border-radius: 24%;
   background: var(--surface-2);
   display: grid; place-items: center; flex: none;
 }
 .menu-tile .tile-icon i {
-  display: block; width: 64%; height: 64%;
+  display: block; width: 66%; height: 66%;
   background: var(--ink);
   -webkit-mask: var(--icon) center / contain no-repeat;
           mask: var(--icon) center / contain no-repeat;
@@ -176,8 +176,8 @@ button:active { transform: scale(.98); }
 .menu-tile.accent p { color: color-mix(in srgb, var(--accent-ink) 78%, transparent); }
 .menu-tile.accent .tile-icon, .menu-tile.accent .arrow { background: color-mix(in srgb, var(--accent-ink) 14%, transparent); color: var(--accent-ink); }
 /* 가로로 긴 타일 (포춘쿠키) */
-.menu-tile.wide { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; gap: 1.4rem; text-align: left; padding: 1.2rem 1.6rem; container-type: normal; }
-.menu-tile.wide .tile-icon { width: 5rem; }
+.menu-tile.wide { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: flex-start; gap: 1.4rem; text-align: left; padding: 1.2rem 1.6rem; container-type: normal; }
+.menu-tile.wide .tile-icon { width: 5.8rem; }
 .menu-tile.wide h2 { font-size: 1.6rem; }
 .menu-tile.wide p { font-size: .95rem; }
 .menu-tile.wide .tile-icon { background: var(--gold-soft); color: var(--gold); }

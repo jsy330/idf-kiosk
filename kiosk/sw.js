@@ -1,5 +1,5 @@
 /* 오프라인 대비: 인터넷이 잠깐 끊겨도 마지막으로 받은 화면을 보여줍니다. */
-const CACHE = 'idf-kiosk-v6';
+const CACHE = 'idf-kiosk-v7';
 self.addEventListener('install', (e) => self.skipWaiting());
 self.addEventListener('activate', (e) => e.waitUntil(
   caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())
