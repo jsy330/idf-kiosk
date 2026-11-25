@@ -431,6 +431,14 @@
   $('#admin-reset').addEventListener('click', () => { localStorage.removeItem(LS_CSV); location.reload(); });
   $('#admin-reload').addEventListener('click', () => location.reload());
 
+  /* ───────── 화면 크기 확인 (주소 뒤에 ?size) ───────── */
+  if (new URLSearchParams(location.search).has('size')) {
+    const box = document.createElement('div');
+    box.style.cssText = 'position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:99;background:#000;color:#fff;font:700 22px/1.4 monospace;padding:10px 16px;border-radius:12px;pointer-events:none';
+    const show = () => { box.textContent = `화면 ${innerWidth}×${innerHeight} · 배율 ${devicePixelRatio} · 모니터 ${screen.width}×${screen.height}`; };
+    show(); addEventListener('resize', show); document.body.appendChild(box);
+  }
+
   /* ───────── 시작 ───────── */
   document.addEventListener('contextmenu', (e) => e.preventDefault());
   render();
