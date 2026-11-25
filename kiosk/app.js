@@ -96,7 +96,7 @@
     const tile = (route, title, sub, iconHtml, extra = '') => `
       <button class="menu-tile pressable ${extra}" data-go="${route}">
         <span class="arrow">${ICON.arrow}</span>
-        <span class="tile-icon">${iconHtml}</span>
+        <span class="icon-area"><span class="tile-icon">${iconHtml}</span></span>
         <span><h2>${title}</h2><p>${sub}</p></span>
       </button>`;
     const mask = (name) => `<i style="--icon:url('images/menu_black/${name}.png')"></i>`;
