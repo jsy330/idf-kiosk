@@ -148,12 +148,12 @@ button:active { transform: scale(.98); }
 .menu-tile {
   position: relative; overflow: hidden;
   background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow);
-  padding: 1.4rem; text-align: center;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: min(1rem, 4cqh);
+  padding: 1.8rem; text-align: left;
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 1rem;
   min-height: 0; container-type: size;
 }
 .menu-tile .tile-icon {
-  width: min(48cqh, 52cqw); aspect-ratio: 1; border-radius: 24%;
+  width: clamp(5rem, min(34cqh, 36cqw), 12rem); aspect-ratio: 1; border-radius: 24%;
   background: var(--surface-2);
   display: grid; place-items: center; flex: none;
 }
@@ -167,8 +167,8 @@ button:active { transform: scale(.98); }
 .menu-tile h2 { font-size: clamp(1.2rem, min(11cqh, 12cqw), 2.2rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.2; word-break: keep-all; }
 .menu-tile p { margin-top: .3rem; color: var(--ink-3); font-size: clamp(.75rem, min(5.5cqh, 5.4cqw), 1.05rem); line-height: 1.35; word-break: keep-all; }
 .menu-tile .arrow {
-  position: absolute; top: 1.2rem; right: 1.2rem;
-  width: 2.4rem; height: 2.4rem; border-radius: 50%;
+  position: absolute; top: 1.6rem; right: 1.6rem;
+  width: 2.6rem; height: 2.6rem; border-radius: 50%;
   display: grid; place-items: center; background: var(--surface-2); color: var(--ink-2);
 }
 .menu-tile .arrow svg { width: 1.1rem; height: 1.1rem; stroke-width: 2.2; }
