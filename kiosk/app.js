@@ -85,6 +85,28 @@
     cookie: '<svg viewBox="0 0 24 24"><path d="M3 14.5C3 9.5 7 5.5 12 5.5s9 4 9 9c0 1.6-1.6 2.6-3 1.9l-3.2-1.6a6 6 0 0 0-5.6 0L6 16.4c-1.4.7-3-.3-3-1.9Z"/><path d="M12 5.5c-1 3-1 6 0 9"/><path d="M13.5 15.5l2.5 4"/></svg>',
   };
 
+  const ROBOT = `
+    <svg class="mascot" viewBox="0 0 140 150" aria-hidden="true">
+      <ellipse class="m-shadow" cx="66" cy="142" rx="34" ry="5"/>
+      <g class="m-body">
+        <rect x="36" y="104" width="13" height="22" rx="5" class="m-ink"/>
+        <rect x="71" y="104" width="13" height="22" rx="5" class="m-ink"/>
+        <g class="m-arm"><rect x="100" y="10" width="14" height="44" rx="7" class="m-ink"/></g>
+        <rect x="9" y="62" width="14" height="32" rx="7" class="m-ink"/>
+        <line x1="60" y1="28" x2="60" y2="12" class="m-antenna"/>
+        <circle cx="60" cy="10" r="7" class="m-accent"/>
+        <rect x="20" y="28" width="86" height="82" rx="24" class="m-ink"/>
+        <rect x="31" y="40" width="64" height="40" rx="13" class="m-face"/>
+        <g class="m-eyes">
+          <rect x="45" y="48" width="9" height="15" rx="4" class="m-accent"/>
+          <rect x="72" y="48" width="9" height="15" rx="4" class="m-accent"/>
+        </g>
+        <path d="M55 69q8 6 16 0" class="m-smile"/>
+        <circle cx="40" cy="70" r="4" class="m-cheek"/>
+        <circle cx="86" cy="70" r="4" class="m-cheek"/>
+      </g>
+    </svg>`;
+
   /* ───────── 홈 ───────── */
   function counts(cat) {
     const list = state.items.filter((x) => x.category === cat);
@@ -103,13 +125,16 @@
     view.innerHTML = `
       <div class="home">
         <section class="hero">
-          <div class="eyebrow">IDEA DREAM FACTORY</div>
-          <h1>IDF에 오신 것을 환영합니다.</h1>
-          <p>여러분의 아이디어를 함께 실현해드립니다. 원하시는 메뉴를 터치해주세요.</p>
-          <div class="hero-stats">
-            <span class="stat">장비 <b>${m.total}</b>대</span>
-            <span class="stat">공구 <b>${t.total}</b>종</span>
+          <div class="hero-text">
+            <div class="eyebrow">IDEA DREAM FACTORY</div>
+            <h1>IDF에 오신 것을 환영합니다.</h1>
+            <p>여러분의 아이디어를 함께 실현해드립니다.<br />원하시는 메뉴를 터치해주세요.</p>
+            <div class="hero-stats">
+              <span class="stat">장비 <b>${m.total}</b>대</span>
+              <span class="stat">공구 <b>${t.total}</b>종</span>
+            </div>
           </div>
+          ${ROBOT}
         </section>
         <div class="menu-grid">
           ${tile('tool', '공구 안내', '사용 가능한 공구 정보를 제공합니다.', mask('tool'))}

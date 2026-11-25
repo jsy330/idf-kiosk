@@ -127,7 +127,25 @@ button:active { transform: scale(.98); }
 .hero {
   background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow);
   padding: 1.8rem 2rem; flex: none;
+  display: flex; align-items: center; gap: 1rem;
 }
+.hero-text { flex: 1; min-width: 0; }
+/* 환영 카드의 로봇 캐릭터 */
+.mascot { flex: none; width: 9.5rem; height: auto; margin: -.6rem .4rem -.6rem 0; overflow: visible; }
+.mascot .m-ink { fill: var(--ink); }
+.mascot .m-face { fill: var(--surface); }
+.mascot .m-accent { fill: var(--accent); }
+.mascot .m-antenna { stroke: var(--ink); stroke-width: 5; stroke-linecap: round; }
+.mascot .m-smile { fill: none; stroke: var(--accent); stroke-width: 3.5; stroke-linecap: round; }
+.mascot .m-cheek { fill: #f29bb7; opacity: .75; }
+.mascot .m-shadow { fill: var(--ink); opacity: .08; }
+.mascot .m-body { animation: m-bob 1.8s ease-in-out infinite; }
+.mascot .m-arm { transform-box: fill-box; transform-origin: 50% 90%; animation: m-wave 1.8s ease-in-out infinite; }
+.mascot .m-eyes { transform-box: fill-box; transform-origin: center; animation: m-blink 4s infinite; }
+@keyframes m-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes m-wave { 0%, 100% { transform: rotate(8deg); } 25% { transform: rotate(-22deg); } 50% { transform: rotate(10deg); } 75% { transform: rotate(-18deg); } }
+@keyframes m-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.15); } }
+@media (prefers-reduced-motion: reduce) { .mascot * { animation: none !important; } }
 .hero .eyebrow { color: var(--accent); font-weight: 700; font-size: .9rem; letter-spacing: .04em; }
 .hero h1 { font-size: 2.3rem; line-height: 1.25; letter-spacing: -.03em; margin-top: .5rem; font-weight: 800; }
 .hero p { margin-top: .7rem; color: var(--ink-2); font-size: 1.05rem; }
