@@ -7,7 +7,7 @@ idf 업뎃/
 │   ├── data/equipment.csv   ← 장비·공구 목록 (여기만 고치면 됨)
 │   └── images/              ← 용량 줄인 이미지 (31MB → 3.4MB)
 ├── pi-setup/         ← 라즈베리파이 자동 실행 스크립트
-└── .github/workflows/ ← 푸시하면 GitHub Pages로 자동 배포
+└── netlify.toml      ← Netlify 배포 설정 (푸시하면 자동 배포)
 ```
 
 ## 1. 장비·공구 목록 넣기
@@ -26,20 +26,26 @@ id,name,category,location,zone,status,description,safety,imageUrl,locationImageU
 - 엑셀에서 저장할 때는 **CSV UTF-8** 형식으로 저장하세요.
 - 장비 위치 지도로 지정된 `images/map/1.png ~ 14.png` 파일은 아직 없습니다. 지금은 전체 시설 지도가 대신 나옵니다. 그림을 만들면 `kiosk/images/map/`에 넣기만 하면 됩니다.
 
-## 2. 인터넷 주소로 배포하기 (GitHub Pages, 무료)
+## 2. 인터넷 주소로 배포하기 (Netlify, 무료)
 
-이 저장소의 `main` 브랜치에 올리면 `.github/workflows/pages.yml`이 `kiosk` 폴더를 자동으로 배포합니다. 주소는 `https://<깃허브아이디>.github.io/<저장소이름>/` 형태입니다.
+깃허브 저장소(jsy330/idf-kiosk)를 Netlify에 연결해 두면, 푸시할 때마다 자동으로 사이트에 반영됩니다. 배포 설정은 저장소의 `netlify.toml`에 들어 있습니다.
 
-**수정할 때:** `kiosk/data/equipment.csv` 같은 파일을 고친 다음 커밋하고 푸시하면 1~2분 뒤 사이트에 반영됩니다. 깃허브 웹사이트에서 파일을 직접 고쳐도 똑같이 반영됩니다. 키오스크 화면은 다음에 새로고침하거나 재부팅할 때 새 버전으로 바뀝니다.
+처음 한 번만:
+1. https://app.netlify.com 에서 **GitHub 계정으로 가입·로그인**합니다.
+2. **Add new project → Import an existing project → GitHub**를 누르고 `idf-kiosk`를 고릅니다.
+3. 설정은 그대로 두고 **Deploy**를 누릅니다.
+4. **Project configuration → Change project name**에서 이름을 정하면 `https://이름.netlify.app` 주소가 생깁니다.
 
-정적 사이트라서 서버가 잠들지 않습니다. 주기적으로 접속해 줄 필요가 없습니다.
+**수정할 때:** `kiosk/data/equipment.csv` 같은 파일을 고친 다음 커밋하고 푸시하면 1분 안에 사이트에 반영됩니다. 깃허브 웹사이트에서 파일을 직접 고쳐도 똑같이 반영됩니다. 키오스크 화면은 다음에 새로고침하거나 재부팅할 때 새 버전으로 바뀝니다.
+
+정적 사이트라서 서버가 잠들지 않습니다. 주기적으로 접속해 줄 필요가 없고, 키오스크 한 대가 쓰는 양이면 무료 사용량 안에서 충분합니다.
 
 ## 3. 라즈베리파이: 전원만 켜면 자동으로 열리게
 
 `pi-setup` 폴더를 USB 등으로 라즈베리파이에 옮긴 다음, 터미널에서 **한 번만** 실행합니다.
 
 ```bash
-bash install-kiosk.sh https://<깃허브아이디>.github.io/<저장소이름>/
+bash install-kiosk.sh https://이름.netlify.app
 sudo reboot
 ```
 
