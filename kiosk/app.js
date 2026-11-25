@@ -112,9 +112,9 @@
           </div>
         </section>
         <div class="menu-grid">
-          ${tile('map', '시설 안내', 'IDF 공간 위치를 안내합니다.', mask('map'))}
-          ${tile('machine', '장비 안내', '주요 장비의 위치와 사용법을 안내합니다.', mask('machine'))}
           ${tile('tool', '공구 안내', '사용 가능한 공구 정보를 제공합니다.', mask('tool'))}
+          ${tile('machine', '장비 안내', '주요 장비의 위치와 사용법을 안내합니다.', mask('machine'))}
+          ${tile('map', '시설 안내', 'IDF 공간 위치를 안내합니다.', mask('map'))}
           ${tile('game', '잠깐 쉬어가기', '터치 한 번으로 즐기는 미니 게임', ICON.game, 'accent')}
           ${tile('fortune', '오늘의 포춘쿠키', '쿠키를 깨고 오늘의 행운을 확인해보세요.', ICON.cookie, 'wide')}
         </div>
