@@ -353,6 +353,7 @@
     else if (page === 'game') renderGame();
     else if (page === 'fortune') renderFortune();
     else renderHome();
+    view.classList.toggle('is-home', !page);
     view.scrollTop = 0;
   }
 
@@ -379,11 +380,14 @@
   });
 
   /* ───────── 시계 ───────── */
-  const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
+  // 라즈베리파이 시간대 설정과 상관없이 항상 한국 시간으로 표시
+  const fmtTime = new Intl.DateTimeFormat('ko-KR', { timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+  const fmtDate = new Intl.DateTimeFormat('ko-KR', { timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', weekday: 'short' });
   function tick() {
     const d = new Date();
-    $('#clock-time').textContent = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-    $('#clock-date').textContent = `${d.getMonth() + 1}월 ${d.getDate()}일 (${DAYS[d.getDay()]})`;
+    $('#clock-time').textContent = fmtTime.format(d);
+    const p = Object.fromEntries(fmtDate.formatToParts(d).map((x) => [x.type, x.value]));
+    $('#clock-date').textContent = `${p.month} ${p.day}일 (${p.weekday})`;
   }
   tick(); setInterval(tick, 10 * 1000);
 

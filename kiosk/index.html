@@ -13,7 +13,7 @@
     // 테마를 첫 렌더 전에 적용해서 깜빡임 방지
     (function () {
       var q = new URLSearchParams(location.search).get('theme');
-      var t = q || localStorage.getItem('idf-theme') || 'auto';
+      var t = q || localStorage.getItem('idf-theme') || 'light';
       if (t === 'auto') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       document.documentElement.dataset.theme = t;
     })();
