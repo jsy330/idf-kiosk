@@ -108,6 +108,8 @@ h1, h2, h3, p { margin: 0; }
   overscroll-behavior: contain;
 }
 .view::-webkit-scrollbar { display: none; }
+.view.dragging { cursor: grabbing; }
+.view.dragging * { pointer-events: none; } /* 끄는 중에는 카드 눌림 효과 없음 */
 .view > * { animation: enter .35s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes enter { from { opacity: 0; transform: translateY(12px); } }
 @media (prefers-reduced-motion: reduce) { .view > * { animation: none; } }

@@ -456,6 +456,66 @@
   $('#admin-reset').addEventListener('click', () => { localStorage.removeItem(LS_CSV); location.reload(); });
   $('#admin-reload').addEventListener('click', () => location.reload());
 
+  /* ───────── 끌어서 스크롤 ─────────
+     라즈베리파이 터치스크린이 '마우스'로 인식되면 손가락으로 끌어도 스크롤이 안 됨.
+     → 마우스 방식 입력일 때 직접 끌어서 스크롤 + 관성. (진짜 터치는 브라우저가 알아서 스크롤) */
+  (function dragScroll() {
+    const THRESH = 8;
+    let d = null, momentum = 0, suppressClick = false;
+    const stopMomentum = () => { cancelAnimationFrame(momentum); momentum = 0; };
+
+    view.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch' || e.button !== 0) return;
+      if (e.target.closest('.game-card, #cookie')) return;
+      stopMomentum();
+      const chips = e.target.closest('.chips');
+      d = { x: e.clientX, y: e.clientY, id: e.pointerId, chips, top: view.scrollTop,
+            left: chips ? chips.scrollLeft : 0, axis: null, last: e.clientY, lastX: e.clientX, t: performance.now(), v: 0 };
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (!d || e.pointerId !== d.id) return;
+      const dx = e.clientX - d.x, dy = e.clientY - d.y;
+      if (!d.axis) {
+        if (Math.abs(dx) < THRESH && Math.abs(dy) < THRESH) return;
+        d.axis = d.chips && Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+        try { view.setPointerCapture(e.pointerId); } catch (_) {}
+        view.classList.add('dragging');
+      }
+      const now = performance.now(), dt = Math.max(1, now - d.t);
+      if (d.axis === 'x') {
+        d.chips.scrollLeft = d.left - dx;
+        d.v = 0.8 * ((d.lastX - e.clientX) / dt) + 0.2 * d.v; d.lastX = e.clientX;
+      } else {
+        view.scrollTop = d.top - dy;
+        d.v = 0.8 * ((d.last - e.clientY) / dt) + 0.2 * d.v; d.last = e.clientY;
+      }
+      d.t = now;
+    });
+
+    const end = (e) => {
+      if (!d || (e && e.pointerId !== d.id)) return;
+      const cur = d; d = null;
+      view.classList.remove('dragging');
+      if (!cur.axis) return;                 // 끌지 않았으면 보통 터치(클릭)로 처리
+      suppressClick = true;                   // 끈 뒤 손을 뗄 때 카드가 눌리지 않게
+      setTimeout(() => { suppressClick = false; }, 50);
+      if (performance.now() - cur.t > 80) return; // 멈췄다 떼면 관성 없음
+      let v = Math.max(-45, Math.min(45, cur.v * 16)); // px / 프레임 (너무 멀리 날아가지 않게 상한)
+      const el = cur.axis === 'x' ? cur.chips : view, prop = cur.axis === 'x' ? 'scrollLeft' : 'scrollTop';
+      const step = () => {
+        if (Math.abs(v) < 0.4) { momentum = 0; return; }
+        el[prop] += v; v *= 0.95;
+        momentum = requestAnimationFrame(step);
+      };
+      momentum = requestAnimationFrame(step);
+    };
+    window.addEventListener('pointerup', end);
+    window.addEventListener('pointercancel', end);
+    view.addEventListener('click', (e) => { if (suppressClick) { e.stopPropagation(); e.preventDefault(); suppressClick = false; } }, true);
+    window.addEventListener('hashchange', stopMomentum);
+  })();
+
   /* ───────── 화면 크기 확인 (주소 뒤에 ?size) ───────── */
   if (new URLSearchParams(location.search).has('size')) {
     const box = document.createElement('div');
