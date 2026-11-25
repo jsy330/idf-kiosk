@@ -34,7 +34,7 @@ id,name,category,location,zone,status,description,safety,imageUrl,locationImageU
 1. https://app.netlify.com 에서 **GitHub 계정으로 가입·로그인**합니다.
 2. **Add new project → Import an existing project → GitHub**를 누르고 `idf-kiosk`를 고릅니다.
 3. 설정은 그대로 두고 **Deploy**를 누릅니다.
-4. **Project configuration → Change project name**에서 이름을 정하면 `https://이름.netlify.app` 주소가 생깁니다.
+4. **Project configuration → Change project name**에서 이름을 정하면 `https://idf-kiosk.netlify.app` 주소가 생깁니다.
 
 **수정할 때:** `kiosk/data/equipment.csv` 같은 파일을 고친 다음 커밋하고 푸시하면 1분 안에 사이트에 반영됩니다. 깃허브 웹사이트에서 파일을 직접 고쳐도 똑같이 반영됩니다. 키오스크 화면은 다음에 새로고침하거나 재부팅할 때 새 버전으로 바뀝니다.
 
@@ -45,7 +45,7 @@ id,name,category,location,zone,status,description,safety,imageUrl,locationImageU
 `pi-setup` 폴더를 USB 등으로 라즈베리파이에 옮긴 다음, 터미널에서 **한 번만** 실행합니다.
 
 ```bash
-bash install-kiosk.sh https://이름.netlify.app
+bash install-kiosk.sh https://idf-kiosk.netlify.app
 sudo reboot
 ```
 

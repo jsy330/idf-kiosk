@@ -1,6 +1,6 @@
 #!/bin/bash
 # IDF 키오스크 자동 실행 설정 (라즈베리파이에서 한 번만 실행)
-#   사용법:  bash install-kiosk.sh https://이름.netlify.app
+#   사용법:  bash install-kiosk.sh https://idf-kiosk.netlify.app
 # 다음 부팅부터 전원만 켜면 크롬이 전체화면으로 키오스크 주소를 엽니다.
 set -e
 URL="$1"
